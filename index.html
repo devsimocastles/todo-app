@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="sass/styles.css">
+
+  <!-- JOSEFIN FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <title>Frontend Mentor | Todo app</title>
+</head>
+
+<body>
+  <header>
+    <h1 class="logo">TODO</h1>
+    <span id="theme__switch">
+      <img src="https://svgur.com/i/zDL.svg" alt="turn on light theme" id="switch_icon">
+    </span>
+  </header>
+  <div class="create__todo">
+    <div class="input__wrapper">
+      <label class="checkbox__container">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+      </label>
+      <input type="text" placeholder="Create a new todo...">
+    </div>
+  </div>
+  <div class="todo__container">
+    <div class="options">
+      <span class="items__left">
+        <span id="cantity">0</span>  items left
+      </span>
+      <button id="clear_completed">Clear completed</button>
+    </div>
+  </div>
+
+
+
+  <div class="filter__options">
+    <span class="filter__btn" data-filter="all">All</span>
+    <span class="filter__btn" data-filter="active">Active</span>
+    <span class="filter__btn" data-filter="completed">Completed</span>
+  </div>
+
+  <script src="js/theme_switch.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

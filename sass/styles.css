@@ -1,0 +1,377 @@
+.todo, .filter__options, .todo__container .options, .create__todo {
+  padding: 1em 0;
+  min-height: 3.5em;
+  max-height: -moz-max-content;
+  max-height: max-content;
+}
+
+.filter__options, .todo__container, .create__todo, header {
+  width: 90%;
+  max-width: 30em !important;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Josefin Sans", system-ui, sans-serif;
+}
+
+body {
+  background: url("https://images2.imgbox.com/05/fa/Y6wPyOYF_o.jpg") no-repeat;
+  background-size: 100% 200px;
+  background-color: hsl(235, 21%, 11%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+body.light {
+  background-color: hsl(236, 33%, 92%);
+}
+
+body.dark {
+  background-color: hsl(235, 21%, 11%);
+}
+
+body > * {
+  transition: 0.3s all ease;
+}
+
+header,
+.todo__container,
+.filter__options,
+.create__todo {
+  max-width: 25em;
+  margin: 0 2em;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  border-radius: 12px;
+  height: 7.5em;
+}
+header .logo {
+  color: #fafafa;
+  letter-spacing: 12px;
+}
+header #theme__switch img {
+  width: 1.5em;
+  height: auto;
+}
+header #theme__switch img:hover {
+  cursor: pointer;
+}
+
+.create__todo {
+  background-color: hsl(235, 24%, 19%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+.create__todo .input__wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding-left: 1em;
+}
+.create__todo .input__wrapper .checkbox__container {
+  bottom: 13px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+.create__todo .input__wrapper .checkbox__container input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.create__todo .input__wrapper .checkbox__container .checkmark {
+  border: 1px solid #4d5066;
+  border-radius: 50px;
+  width: 1.5em;
+  height: 1.5em;
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.create__todo .input__wrapper .checkbox__container .checkmark:after {
+  content: url("./../images/icon-check.svg");
+  position: absolute;
+  display: none;
+}
+.create__todo .input__wrapper .checkbox__container input:checked ~ .checkmark {
+  background: linear-gradient(-45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.create__todo .input__wrapper .checkbox__container input:checked ~ .checkmark:after {
+  display: block;
+}
+.create__todo .input__wrapper input[type=text] {
+  margin-left: 2em;
+  background-color: transparent;
+  border: none;
+  color: #e4e5f1;
+  font-size: 18px;
+}
+.create__todo .input__wrapper input[type=text]:focus {
+  outline: none;
+}
+.create__todo .input__wrapper input[type=text]::-moz-placeholder {
+  color: #4d5066;
+}
+.create__todo .input__wrapper input[type=text]::placeholder {
+  color: #4d5066;
+}
+
+.create__todo.dark {
+  background-color: hsl(235, 24%, 19%);
+}
+.create__todo.dark .input__wrapper .checkbox__container .checkmark {
+  border: 1px solid #4d5066;
+}
+.create__todo.dark .input__wrapper .checkbox__container input:checked ~ .checkmark {
+  background: linear-gradient(-45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.create__todo.dark .input__wrapper input[type=text] {
+  color: #e4e5f1;
+}
+.create__todo.dark .input__wrapper input[type=text]::-moz-placeholder {
+  color: #4d5066;
+}
+.create__todo.dark .input__wrapper input[type=text]::placeholder {
+  color: #4d5066;
+}
+
+.create__todo.light {
+  background-color: #fafafa;
+}
+.create__todo.light .input__wrapper .checkbox__container .checkmark {
+  border: 1px solid hsl(236, 9%, 61%);
+}
+.create__todo.light .input__wrapper .checkbox__container input:checked ~ .checkmark {
+  background: linear-gradient(-45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.create__todo.light .input__wrapper input[type=text] {
+  color: hsl(235, 19%, 35%);
+}
+.create__todo.light .input__wrapper input[type=text]::-moz-placeholder {
+  color: hsl(236, 9%, 61%);
+}
+.create__todo.light .input__wrapper input[type=text]::placeholder {
+  color: hsl(236, 9%, 61%);
+}
+
+.todo__container {
+  box-shadow: 0px 1px 25px hsla(235, 19%, 35%, 0.336);
+  background-color: hsl(235, 24%, 19%);
+  margin-top: 1em;
+  margin-bottom: 2em;
+  border-radius: 12px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.todo__container .options {
+  transition: all 0.3s ease;
+  background-color: hsl(235, 24%, 19%);
+  order: 2;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+}
+.todo__container .options .items__left,
+.todo__container .options #clear_completed {
+  color: #4d5066;
+  font-size: 0.9em;
+}
+.todo__container .options #clear_completed {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.todo__container .options #clear_completed:hover {
+  text-decoration: underline;
+}
+.todo__container .options.light {
+  background-color: #fafafa;
+}
+.todo__container .options.dark {
+  background-color: hsl(235, 24%, 19%);
+}
+
+.todo__container.dark {
+  background-color: hsl(235, 24%, 19%);
+}
+.todo__container.dark .options {
+  background-color: hsl(235, 24%, 19%);
+}
+.todo__container.dark .options .items__left,
+.todo__container.dark .options #clear_completed {
+  color: #4d5066;
+}
+
+.todo__container.light {
+  background-color: #fafafa;
+}
+.todo__container.light .options {
+  background-color: #fafafa;
+}
+.todo__container.light .options .items__left,
+.todo__container.light .options #clear_completed {
+  color: hsl(236, 9%, 61%);
+}
+
+.filter__options {
+  margin-bottom: 5em;
+  box-shadow: 0px 1px 25px hsla(235, 19%, 35%, 0.336);
+  background-color: hsl(235, 24%, 19%);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+.filter__options span {
+  color: #4d5066;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filter__options.dark {
+  background-color: hsl(235, 24%, 19%);
+}
+.filter__options.dark span {
+  color: hsl(236, 9%, 61%);
+}
+
+.filter__options.light {
+  background-color: #fafafa;
+}
+.filter__options.light span {
+  color: hsl(236, 9%, 61%);
+}
+
+/***
+    STYLES FOR DYNAMICALLY
+    GENERATED TODO'S    
+
+*/
+#first {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.todo {
+  border-bottom: 1px solid #4d5066;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.todo .checkbox__container {
+  bottom: 13px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+.todo .checkbox__container input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.todo .checkbox__container .checkmark {
+  border: 1px solid #4d5066;
+  border-radius: 50px;
+  width: 1.5em;
+  height: 1.5em;
+  position: absolute;
+  left: 1em;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.todo .checkbox__container .checkmark:after {
+  content: url("./../images/icon-check.svg");
+  position: absolute;
+  display: none;
+}
+.todo .checkbox__container input:checked ~ .checkmark {
+  background: linear-gradient(-45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.todo .checkbox__container input:checked ~ .checkmark:after {
+  display: block;
+}
+.todo .todo__title {
+  color: #e4e5f1;
+  max-width: 60%;
+}
+.todo .close__icon__container {
+  position: relative;
+  right: 1em;
+  cursor: pointer;
+}
+
+.todo.dark {
+  border-bottom: 1px solid #4d5066;
+}
+.todo.dark .checkmark {
+  border: 1px solid #4d5066;
+}
+.todo.dark input:checked ~ .checkmark {
+  background: linear-gradient(-45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.todo.dark .todo__title {
+  color: #e4e5f1;
+}
+.todo.dark .todo__title.checked {
+  text-decoration: line-through;
+  color: #4d5066;
+}
+
+.todo.light {
+  border-bottom: 1px solid hsl(236, 9%, 61%);
+}
+.todo.light .checkmark {
+  border: 1px solid hsl(236, 9%, 61%);
+}
+.todo.light input:checked ~ .checkmark {
+  background: linear-gradient(-45deg, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+}
+.todo.light .todo__title {
+  color: hsl(235, 19%, 35%);
+}
+.todo.light .todo__title.checked {
+  text-decoration: line-through;
+  color: hsl(236, 9%, 61%);
+}
+
+@media screen and (min-width: 450px) {
+  body {
+    background-image: url("https://images2.imgbox.com/c7/80/7yurbPTn_o.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 300px;
+  }
+}/*# sourceMappingURL=styles.css.map */

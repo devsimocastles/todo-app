@@ -1,0 +1,435 @@
+// VARIABLE PARTIAL 
+@import "vars";
+
+
+
+// EXTEND HERITANCE
+%todo-options-style {
+    padding: 1em 0;
+    min-height: 3.5em;
+    max-height: max-content;
+
+}
+
+// min width for components
+
+%todo-size{
+    width: 90%;
+    max-width: 30em !important;
+}
+
+
+// MIXINS
+@mixin set_flex($dtn, $al, $jc) {
+    display: flex;
+    align-items: $al;
+    justify-content: $jc;
+    flex-direction: $dtn;
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Josefin Sans", system-ui, sans-serif;
+}
+
+body {
+    background: url("https://images2.imgbox.com/05/fa/Y6wPyOYF_o.jpg") no-repeat;
+    background-size: 100% 200px;
+    background-color: $VeryDarkBlue;
+
+    @include set_flex(column, center, center);
+}
+
+body.light{
+    background-color: $VeryLightGrayishBlue_light;
+}
+
+body.dark{
+    background-color: $VeryDarkBlue;
+}
+
+body > * {
+    transition: .3s all ease;
+}
+
+header,
+.todo__container,
+.filter__options,
+.create__todo {
+    max-width: 25em;
+    margin: 0 2em;
+}
+
+header {
+    @extend %todo-size;
+    @include set_flex(row, center, space-between);
+    border-radius: 12px;
+    height: 7.5em;
+
+    .logo {
+        color: $VeryLightGray_light;
+        letter-spacing: 12px;
+    }
+
+    #theme__switch {
+        img {
+            width: 1.5em;
+            height: auto;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+.create__todo {
+    background-color: $VeryDarkDesaturatedBlue;
+    border-radius: 10px;
+    @extend %todo-options-style;
+    @extend %todo-size;
+    @include set_flex(row, center, flex-start);
+
+    .input__wrapper {
+        @include set_flex(row, center, flex-start);
+        padding-left: 1em;
+
+        .checkbox__container {
+            bottom: 13px;
+            display: block;
+            position: relative;
+            cursor: pointer;
+
+            input {
+                position: absolute;
+                width: 0;
+                height: 0;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            .checkmark {
+                border: 1px solid $VeryDarkGrayishBlue;
+                border-radius: 50px;
+                width: 1.5em;
+                height: 1.5em;
+                position: absolute;
+                left: 0;
+                right: 0;
+                @include set_flex(row, center, center);
+            }
+
+            .checkmark:after {
+                content: url("./../images/icon-check.svg");
+                position: absolute;
+
+                display: none;
+            }
+
+            & input:checked~.checkmark {
+                background: $CheckBackground;
+            }
+
+            & input:checked~.checkmark:after {
+                display: block;
+            }
+
+        }
+
+        input[type="text"] {
+            margin-left: 2em;
+            background-color: transparent;
+            border: none;
+            color: $LightGrayishBlue;
+            font-size: $font-s;
+
+            &:focus {
+                outline: none;
+            }
+
+            &::placeholder {
+                color: $VeryDarkGrayishBlue;
+            }
+        }
+    }
+}
+
+
+// CREATE TODO INPUT DARK
+
+.create__todo.dark {
+    background-color: $VeryDarkDesaturatedBlue;
+    .input__wrapper {
+        .checkbox__container {
+            .checkmark {
+                border: 1px solid $VeryDarkGrayishBlue;
+            }
+
+            & input:checked~.checkmark {
+                background: $CheckBackground;
+            }
+        }
+        input[type="text"] {
+            color: $LightGrayishBlue;
+
+            &::placeholder {
+                color: $VeryDarkGrayishBlue;
+            }
+        }
+    }
+}
+
+
+// CREATE TODO INPUT LIGHT 
+.create__todo.light {
+    background-color: $VeryLightGray_light;
+    .input__wrapper {
+        .checkbox__container {
+            .checkmark {
+                border: 1px solid $DarkGrayishBlue_light;
+            }
+
+            & input:checked~.checkmark {
+                background: $CheckBackground;
+            }
+        }
+        input[type="text"] {
+            color: $VeryDarkGrayishBlue_light;
+            &::placeholder {
+                color: $DarkGrayishBlue_light;
+            }
+        }
+    }
+}
+
+
+
+
+
+    .todo__container {
+        @extend %todo-size;
+        box-shadow: 0px 1px 25px  hsla(235, 19%, 35%, 0.336);
+        background-color: $VeryDarkDesaturatedBlue;
+        margin-top: 1em;
+        margin-bottom: 2em;
+        border-radius: 12px;
+        @include set_flex(column, stretch, space-evenly);
+
+        .options {
+            transition: all .3s ease;
+            background-color: $VeryDarkDesaturatedBlue;
+            order: 2;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            @extend %todo-options-style;
+            @include set_flex(row, center, space-around);
+
+            .items__left,
+            #clear_completed {
+                color: $VeryDarkGrayishBlue;
+                font-size: .9em;
+            }
+
+            #clear_completed {
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+
+            &.light{
+                background-color: $VeryLightGray_light;
+            }
+
+            &.dark{
+                background-color: $VeryDarkDesaturatedBlue;
+            }
+        }
+    }
+
+    .todo__container.dark {
+        background-color: $VeryDarkDesaturatedBlue;
+
+        .options {
+            background-color: $VeryDarkDesaturatedBlue;
+
+            .items__left,
+            #clear_completed {
+                color: $VeryDarkGrayishBlue;
+            }
+        }
+    }
+
+    .todo__container.light {
+        background-color: $VeryLightGray_light;
+
+        .options {
+            background-color: $VeryLightGray_light;
+
+            .items__left,
+            #clear_completed {
+                color: $DarkGrayishBlue_light;
+            }
+        }
+    }
+
+    .filter__options {
+        margin-bottom: 5em;
+        box-shadow: 0px 1px 25px  hsla(235, 19%, 35%, 0.336);
+        background-color: $VeryDarkDesaturatedBlue;
+        border-radius: 10px;
+        @extend %todo-options-style;
+        @extend %todo-size;
+        @include set_flex(row, center, space-evenly);
+
+        & span {
+            color: $VeryDarkGrayishBlue;
+            font-weight: 700;
+            cursor: pointer;
+        }
+    }
+    .filter__options.dark{
+        background-color: $VeryDarkDesaturatedBlue;
+        & span {
+            color:$DarkGrayishBlue_light;
+        }
+    }
+    .filter__options.light{
+        background-color: $VeryLightGray_light;
+        & span {
+            color:$DarkGrayishBlue_light;
+        }
+    }
+
+
+
+
+
+    /***
+    STYLES FOR DYNAMICALLY
+    GENERATED TODO'S    
+
+*/
+    #first {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+
+    .todo {
+        border-bottom: 1px solid $VeryDarkGrayishBlue;
+        @extend %todo-options-style;
+        @include set_flex(row, center, space-between);
+
+        .checkbox__container {
+            bottom: 13px;
+            display: block;
+            position: relative;
+            cursor: pointer;
+
+            input {
+                position: absolute;
+                width: 0;
+                height: 0;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+            .checkmark {
+                border: 1px solid $VeryDarkGrayishBlue;
+                border-radius: 50px;
+                width: 1.5em;
+                height: 1.5em;
+                position: absolute;
+                left: 1em;
+                right: 0;
+                @include set_flex(row, center, center);
+            }
+
+            .checkmark:after {
+                content: url("./../images/icon-check.svg");
+                position: absolute;
+                display: none;
+            }
+
+            & input:checked~.checkmark {
+                background: $CheckBackground;
+            }
+
+            & input:checked~.checkmark:after {
+                display: block;
+            }
+        }
+
+        .todo__title {
+            color: $LightGrayishBlue;
+            max-width: 60%;
+        }
+
+        .close__icon__container {
+            position: relative;
+            right: 1em;
+            cursor: pointer;
+        }
+    }
+
+    // TODO DARK
+    .todo.dark {
+        border-bottom: 1px solid $VeryDarkGrayishBlue;
+
+        .checkmark {
+            border: 1px solid $VeryDarkGrayishBlue;
+        }
+
+        & input:checked~.checkmark {
+            background: $CheckBackground;
+        }
+
+        .todo__title {
+            color: $LightGrayishBlue;
+            &.checked {
+                text-decoration: line-through;
+                color: $VeryDarkGrayishBlue;
+            }
+        }
+    }
+
+    // TODO LIGHT
+    .todo.light {
+        border-bottom: 1px solid $DarkGrayishBlue_light;
+
+        .checkmark {
+            border: 1px solid $DarkGrayishBlue_light;
+        }
+
+        & input:checked~.checkmark {
+            background: $CheckBackground;
+        }
+
+        .todo__title {
+            color: $VeryDarkGrayishBlue_light;
+            &.checked {
+                text-decoration: line-through;
+                color: $DarkGrayishBlue_light;
+            }
+        }
+    }
+
+
+
+
+
+    @media screen and (min-width:450px) {
+        body{
+            background-image: url("https://images2.imgbox.com/c7/80/7yurbPTn_o.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 300px;
+        }
+    }
